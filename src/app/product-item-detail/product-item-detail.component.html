@@ -1,0 +1,24 @@
+<div class="product-detail-container">
+  <div>
+    <img src="{{ product.url }}" />
+  </div>
+  <div class="product-information">
+    <span class="product-name">{{ product.name }}</span>
+    <span class="product-price">${{ product.price }}</span>
+    <span>{{ product.description }}</span>
+    <input
+      type="number"
+      min="1"
+      class="product-quantity"
+      [(ngModel)]="quantityProduct"
+    />
+    <button
+      type="button"
+      class="btn btn-primary mb-2 mt-2"
+      (click)="addToCart(product)"
+    >
+      Add to cart
+    </button>
+    <a routerLink="/"> Back to product list</a>
+  </div>
+</div>

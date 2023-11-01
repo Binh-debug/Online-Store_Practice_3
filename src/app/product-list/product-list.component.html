@@ -1,0 +1,28 @@
+<div class="container-product-list">
+  <ul class="product-container">
+    <li *ngFor="let product of products; let i = index" class="product-index">
+      <div class="wrap-product">
+        <div class="wrap-image">
+          <a routerLink="/product-detail" (click)="handleClick(product)"
+            ><img class="img" src="{{ product.url }}"
+          /></a>
+        </div>
+        <span class="product-name">{{ product.name }}</span>
+        <span class="product-price">${{ product.price }}</span>
+        <input
+          type="number"
+          min="1"
+          class="product-quantity"
+          [(ngModel)]="quantityProduct[i]"
+        />
+        <button
+          type="button"
+          class="btn btn-primary mb-5"
+          (click)="addToCart(product, i)"
+        >
+          Add to cart
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

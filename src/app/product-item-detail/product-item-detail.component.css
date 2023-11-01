@@ -1,0 +1,35 @@
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border-radius: 10px;
+  width: 320px;
+}
+
+.product-information {
+  display: flex;
+  flex-direction: column;
+  padding-left: 70px;
+  justify-content: center;
+}
+
+.product-name {
+  font-size: 45px;
+  font-weight: bold;
+  padding: 5px 0px;
+}
+.product-price {
+  padding: 5px 0px;
+  font-style: italic;
+}
+.product-quantity {
+  padding: 5px 10px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  width: 100px;
+}

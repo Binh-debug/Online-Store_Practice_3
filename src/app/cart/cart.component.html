@@ -1,0 +1,72 @@
+<div class="cart-container">
+  <div class="cart-product">
+    <ul>
+      <li *ngFor="let product of cart" class="product-index">
+        <div class="wrap-image">
+          <img src="{{ product.url }}" />
+        </div>
+        <div class="product-information">
+          <span class="product-name">{{ product.name }}</span>
+          <span class="product-price">${{ product.price }}</span>
+          <div>
+            <label>Amount: {{ product.amount }}</label>
+          </div>
+        </div>
+      </li>
+      <span class="fw-bold fs-2"> Total: $ {{ total }}</span>
+    </ul>
+  </div>
+  <div class="cart-user-infor">
+    <div class="alert alert-danger" role="alert" *ngIf="isError">
+      {{ errorMessage }}
+    </div>
+    <form class="form" (ngSubmit)="onSubmit()">
+      <div class="input-field">
+        <label class="mb-2 fw-medium">Full name</label>
+        <input
+          class="p-2 rounded-2"
+          required
+          [minLength]="3"
+          id="fullName"
+          name="fullName"
+          placeholder="(minimum 3 characters)"
+          [(ngModel)]="fullName"
+          #name="ngModel"
+        />
+      </div>
+      <div class="input-field">
+        <label class="mb-2 fw-medium">Address</label>
+        <input
+          class="p-2 rounded-2"
+          required
+          [minLength]="6"
+          id="address"
+          name="address"
+          [(ngModel)]="address"
+          #add="ngModel"
+          placeholder="(minimum 6 characters)"
+        />
+      </div>
+      <div class="input-field">
+        <label class="mb-2 fw-medium">Credit card number</label>
+        <input
+          type="number"
+          class="p-2 rounded-2"
+          [maxLength]="16"
+          id="cardNumber"
+          name="cardNumber"
+          placeholder="(16-digit number)"
+          [(ngModel)]="cardNumber"
+        />
+      </div>
+      <span>We'll never share your payment details with anyone else</span>
+      <input
+        type="submit"
+        value="Submit"
+        [disabled]="isEmptyCart"
+        class="btn btn-primary mt-3"
+      />
+    </form>
+  </div>
+</div>
+<div class="empty-cart-message" *ngIf="isEmptyCart">Your cart is empty.</div>
