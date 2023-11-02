@@ -9,8 +9,11 @@
           <span class="product-name">{{ product.name }}</span>
           <span class="product-price">${{ product.price }}</span>
           <div>
-            <label>Amount: {{ product.amount }}</label>
+            <label class="p-2">Amount: {{ product.amount }}</label>
           </div>
+          <button class="btn btn-danger" (click)="removeProduct(product)">
+            Remove from Cart
+          </button>
         </div>
       </li>
       <span class="fw-bold fs-2"> Total: $ {{ total }}</span>

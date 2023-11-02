@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IProduct, IProductCart, IUserInfo } from '../models/product';
 
@@ -51,7 +51,6 @@ export class ProductService {
   getProductCart() {
     return this.cart;
   }
-
   postUserInfo(userInfo: IUserInfo) {
     this.user = { ...userInfo };
   }
@@ -60,7 +59,12 @@ export class ProductService {
     return this.user;
   }
 
-  clearCar() {
+  clearCart() {
     this.cart = [];
+  }
+
+  removeProduct(product: IProduct) {
+    const newCart = this.cart.filter((item) => item.id !== product.id);
+    this.cart = [...newCart];
   }
 }

@@ -8,10 +8,10 @@ import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { ProductItemDetailComponent } from './product-item-detail/product-item-detail.component';
-import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './layout/header/header.component';
+import { CartStoreComponent } from './cart-store/cart-store.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +19,10 @@ import { HeaderComponent } from './layout/header/header.component';
     CartComponent,
     ConfirmationComponent,
     ProductItemDetailComponent,
-    ProductItemComponent,
+
     ProductListComponent,
     HeaderComponent,
+    CartStoreComponent,
   ],
   imports: [
     BrowserModule,

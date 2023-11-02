@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { IProductCart, IUserInfo } from '../models/product';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { IProduct, IProductCart, IUserInfo } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
 
@@ -8,26 +16,19 @@ import { Router } from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
+  @Input() cart: IProductCart[] = [];
+  @Input() total: number = 0;
+  @Input() isEmptyCart: boolean = true;
+  @Output() buttonRemove: EventEmitter<IProduct> = new EventEmitter();
+
   constructor(private productService: ProductService, private route: Router) {}
-  cart: IProductCart[] = [];
-  total: number = 0;
+
   fullName: string = '';
   address: string = '';
   cardNumber: string = '';
-  isEmptyCart: boolean = true;
   isError: boolean = false;
   errorMessage = '';
-
-  ngOnInit(): void {
-    this.cart = this.productService.getProductCart();
-    this.isEmptyCart = this.cart.length < 1;
-    this.total = this.cart.reduce((accumulator, currentProduct) => {
-      return Number(
-        (accumulator += currentProduct.amount * currentProduct.price).toFixed(2)
-      );
-    }, 0);
-  }
 
   handleValidate(userInfo: IUserInfo) {
     const { fullName, address, cardNumber } = userInfo;
@@ -57,7 +58,11 @@ export class CartComponent implements OnInit {
     this.handleValidate(userInfo);
     if (this.isError) return;
     this.productService.postUserInfo(userInfo);
-    this.productService.clearCar();
+    this.productService.clearCart();
     this.route.navigate(['/confirmation']);
+  }
+
+  removeProduct(product: IProduct) {
+    this.buttonRemove.emit(product);
   }
 }

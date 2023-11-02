@@ -12,7 +12,9 @@ export class ProductListComponent implements OnInit {
 
   products: IProduct[] = [];
 
-  quantityProduct = [0, 0, 0, 0, 0, 0];
+  quantityProduct: number[] = [];
+
+  productToCart: IProductCart[] = [];
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe((res) => {
@@ -23,16 +25,18 @@ export class ProductListComponent implements OnInit {
   handleClick(product: IProduct) {
     this.productService.setProductDetail(product);
   }
-
-  addToCart(product: IProduct, indexProduct: number) {
-    console.log();
+  changeAmount(product: IProduct, index: number) {
+    this.productToCart[index] = {
+      ...product,
+      amount: this.quantityProduct[index],
+    };
+  }
+  addToCart(indexProduct: number) {
     if (this.quantityProduct[indexProduct] < 1) {
       return;
     }
-    const productToCart: IProductCart = {
-      ...product,
-      amount: this.quantityProduct[indexProduct],
-    };
-    this.productService.setProductToCart(productToCart);
+    this.productService.setProductToCart(this.productToCart[indexProduct]);
+
+    alert('Added to cart success');
   }
 }

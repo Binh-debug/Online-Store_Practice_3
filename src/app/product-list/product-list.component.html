@@ -14,11 +14,12 @@
           min="1"
           class="product-quantity"
           [(ngModel)]="quantityProduct[i]"
+          (ngModelChange)="changeAmount(product, i)"
         />
         <button
           type="button"
           class="btn btn-primary mb-5"
-          (click)="addToCart(product, i)"
+          (click)="addToCart(i)"
         >
           Add to cart
         </button>
